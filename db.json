@@ -1,0 +1,46 @@
+{
+  "posts": [
+    {
+      "title": "gfdsg",
+      "content": "gfsdgsd",
+      "createdAt": 1675758679330,
+      "id": 1
+    },
+    {
+      "title": "gfd",
+      "content": "안녕하세요",
+      "createdAt": 1675762462302,
+      "id": 2
+    },
+    {
+      "title": "g",
+      "content": "g",
+      "createdAt": 1675950574891,
+      "id": 3
+    },
+    {
+      "title": "gdgds",
+      "content": "gdsgfdgsfdgfds",
+      "createdAt": 1675959084227,
+      "id": 4
+    },
+    {
+      "title": "gf",
+      "content": "fgf",
+      "createdAt": 1676105340555,
+      "id": 5
+    },
+    {
+      "title": "gfds",
+      "content": "hgfdhgfd",
+      "createdAt": 1676105529154,
+      "id": 6
+    },
+    {
+      "title": "gfdsgdfs",
+      "content": "하이용",
+      "createdAt": 1676106028808,
+      "id": 7
+    }
+  ]
+}
