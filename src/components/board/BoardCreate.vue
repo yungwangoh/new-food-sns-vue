@@ -1,6 +1,6 @@
 <template>
-	<AppCard @click="goPage">
-		<h3 class="card-title text-center">오늘의 레시피는 뭔가요?</h3>
+	<AppCard class="mb-5" @click="goPage">
+		<h2 class="card-title text-center fw-bold">오늘의 레시피는 뭔가요?</h2>
 	</AppCard>
 </template>
 
@@ -10,7 +10,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const goPage = () => {
-	router.push('/board-create');
+	router.push('/board/create');
 };
 </script>
 

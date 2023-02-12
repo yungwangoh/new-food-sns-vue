@@ -7,18 +7,6 @@
       "id": 1
     },
     {
-      "title": "gfd",
-      "content": "안녕하세요",
-      "createdAt": 1675762462302,
-      "id": 2
-    },
-    {
-      "title": "g",
-      "content": "g",
-      "createdAt": 1675950574891,
-      "id": 3
-    },
-    {
       "title": "gdgds",
       "content": "gdsgfdgsfdgfds",
       "createdAt": 1675959084227,
@@ -41,6 +29,12 @@
       "content": "하이용",
       "createdAt": 1676106028808,
       "id": 7
+    },
+    {
+      "title": "하ㅣㅇ요",
+      "content": "ㅎㅇㄴㅎㅇㄴ",
+      "createdAt": 1676190079983,
+      "id": 8
     }
   ]
 }

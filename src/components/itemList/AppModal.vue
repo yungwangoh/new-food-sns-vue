@@ -21,6 +21,7 @@
 								class="btn-close"
 								data-bs-dismiss="modal"
 								aria-label="Close"
+								@click="$emit('update:modelValue', false)"
 							></button>
 						</div>
 						<div class="modal-body">

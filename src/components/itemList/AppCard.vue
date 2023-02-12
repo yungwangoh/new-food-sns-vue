@@ -1,13 +1,13 @@
 <template>
 	<div class="card">
 		<div v-if="$slots.header" class="card-header">
-			<slot class="header"></slot>
+			<slot name="header"></slot>
 		</div>
 		<div v-if="$slots.default" class="card-body">
 			<slot></slot>
 		</div>
 		<div v-if="$slots.footer" class="card-footer">
-			<slot class="footer"></slot>
+			<slot name="footer"></slot>
 		</div>
 	</div>
 </template>

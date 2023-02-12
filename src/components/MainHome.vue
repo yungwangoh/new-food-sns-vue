@@ -1,32 +1,74 @@
 <template>
 	<BoardCreate />
-	<div v-for="item in items" :key="item.id">
-		<BoardItem
-			:title="item.title"
-			:content="item.content"
-			:created-at="item.createdAt"
-		></BoardItem>
-	</div>
+
+	<AppGrid :items="posts" col-class="col-12 col-md-6 col-lg-4">
+		<template v-slot="{ item }">
+			<BoardItem
+				:title="item.title"
+				:content="item.content"
+				:created-at="item.createdAt"
+				@modal="openModal(item)"
+				@click="goToDetailPage(item.id)"
+			></BoardItem>
+		</template>
+	</AppGrid>
+
+	<Teleport to="#modal">
+		<BoardModal
+			v-model="show"
+			:title="modalTitle"
+			:content="modalContent"
+			:created-at="modalCreatedAt"
+		/>
+	</Teleport>
+
+	<AppPagination
+		:current-page="params._page"
+		:page-count="pageCount"
+		@page="page => (params._page = page)"
+	></AppPagination>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import BoardCreate from './board/BoardCreate.vue';
 import BoardItem from './board/BoardItem.vue';
+import BoardModal from './board/modal/BoardModal.vue';
+import AppGrid from './itemList/AppGrid.vue';
+import AppPagination from './itemList/AppPagination.vue';
 import { getPosts } from '@/axios/posts';
+import { useRouter } from 'vue-router';
 
-const items = ref([]);
+const posts = ref([]);
+const router = useRouter();
+const totalCount = ref(0);
+const params = ref({
+	_sort: 'createdAt',
+	_order: 'desc',
+	_page: 1,
+	_limit: 9,
+	title_like: '',
+});
 
 const postList = async () => {
 	try {
-		const { data } = await getPosts();
-		items.value = data;
+		const { data, headers } = await getPosts(params.value);
+		posts.value = data;
+		totalCount.value = headers['x-total-count'];
 	} catch (err) {
 		console.error(err);
 	}
 };
 
-postList();
+const goToDetailPage = id => {
+	router.push(`/board/${id}`);
+};
+
+// pagination
+const pageCount = computed(() =>
+	Math.ceil(totalCount.value / params.value._limit),
+);
+watchEffect(postList);
 
 //modal
 const show = ref(false);
@@ -42,37 +84,4 @@ const openModal = ({ title, content, createdAt }) => {
 };
 </script>
 
-<style>
-.card {
-	border-radius: 4px;
-	background: #fff;
-	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
-	transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
-		0.3s box-shadow,
-		0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
-	padding: 14px 80px 18px 36px;
-	cursor: pointer;
-}
-
-.card:hover {
-	transform: scale(1.05);
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
-}
-
-.card h3 {
-	font-weight: 600;
-}
-
-.card img {
-	position: absolute;
-	top: 20px;
-	right: 15px;
-	max-height: 120px;
-}
-
-@media (max-width: 990px) {
-	.card {
-		margin: 20px;
-	}
-}
-</style>
+<style></style>
