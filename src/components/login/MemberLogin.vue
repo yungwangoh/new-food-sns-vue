@@ -5,7 +5,7 @@
 			<div class="card col-6">
 				<h2 class="card-title text-center mt-4">로그인</h2>
 				<hr class="my-4" />
-				<form @submit.prevent="">
+				<form @submit.prevent="loginForm">
 					<div>
 						<label for="id" class="form-label">아이디</label>
 						<input type="text" class="form-control mb-3" id="id" />
@@ -33,11 +33,22 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { login } from '@/axios/posts';
 
 const router = useRouter();
 
 const goToHome = () => {
 	router.push('/');
+};
+
+const loginForm = async loginForm => {
+	try {
+		const { result } = await login(loginForm);
+		localStorage.setItem('userToken', result);
+		router.push('/');
+	} catch (err) {
+		console.error(err);
+	}
 };
 </script>
 
