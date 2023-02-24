@@ -21,7 +21,6 @@ export function deletePost(id) {
 }
 
 export function memberCreate(memberCreate) {
-	console.log(memberCreate);
 	return posts.post('', memberCreate);
 }
 

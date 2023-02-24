@@ -28,6 +28,7 @@ import LoginOffCanvas from './login/offcanvas/LoginOffCanvas.vue';
 import { useRouter } from 'vue-router';
 
 const itemCheckVar = localStorage.getItem('user');
+console.log(itemCheckVar);
 const router = useRouter();
 const goToHome = () => {
 	router.push('/');

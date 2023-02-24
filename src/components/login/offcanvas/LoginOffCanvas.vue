@@ -1,7 +1,9 @@
 <template>
 	<AppOffcanvas>
 		<template #header>
-			<h2 class="offcanvas-title" id="offcanvasNavbarLabel">윤광오</h2>
+			<h2 class="offcanvas-title" id="offcanvasNavbarLabel">
+				{{ loginInfoStore.memberInfo.email }}
+			</h2>
 			<button
 				type="button"
 				class="btn-close"
@@ -46,6 +48,14 @@
 <script setup>
 import AppOffcanvas from '@/components/itemList/AppOffcanvas.vue';
 import { logout } from '@/axios/posts';
+import { ref } from 'vue';
+import { useLoginData } from '@/store';
+
+const loginInfoStore = useLoginData();
+const logoutForm = ref({});
+const logoutFunc = async () => {
+	const { result } = await logout();
+};
 </script>
 
 <style lang="scss" scoped></style>
