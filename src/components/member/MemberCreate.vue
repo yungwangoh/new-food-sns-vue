@@ -54,6 +54,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { memberCreate } from '@/axios/posts';
+
 const userInfo = ref();
 
 const router = useRouter();

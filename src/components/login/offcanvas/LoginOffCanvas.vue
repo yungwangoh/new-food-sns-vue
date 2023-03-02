@@ -2,7 +2,7 @@
 	<AppOffcanvas>
 		<template #header>
 			<h2 class="offcanvas-title" id="offcanvasNavbarLabel">
-				{{ loginInfoStore.memberInfo.email }}
+				{{ loginInfoStore.memberInfo }}
 			</h2>
 			<button
 				type="button"
@@ -14,11 +14,7 @@
 		<template #default>
 			<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 				<li class="nav-item">
-					<a
-						class="nav-link"
-						aria-current="page"
-						href="#"
-						@click="goToMemberCreate"
+					<a class="nav-link" aria-current="page" href="#" @click="logoutFunc"
 						>로그아웃</a
 					>
 				</li>
@@ -38,7 +34,7 @@
 					<a class="nav-link" href="#" @click="goToLogin">친구</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" @click="goToLogin">설정</a>
+					<a class="nav-link" href="#" @click="cancle">취소</a>
 				</li>
 			</ul>
 		</template>
@@ -50,11 +46,24 @@ import AppOffcanvas from '@/components/itemList/AppOffcanvas.vue';
 import { logout } from '@/axios/posts';
 import { ref } from 'vue';
 import { useLoginData } from '@/store';
+import { useRouter } from 'vue-router';
 
 const loginInfoStore = useLoginData();
-const logoutForm = ref({});
+const router = useRouter();
+
 const logoutFunc = async () => {
-	const { result } = await logout();
+	try {
+		const result = await logout();
+		localStorage.removeItem('user');
+		router.push('/');
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+const cancle = () => {
+	localStorage.clear();
+	router.push('/');
 };
 </script>
 
