@@ -2,7 +2,7 @@
 	<AppOffcanvas>
 		<template #header>
 			<h2 class="offcanvas-title" id="offcanvasNavbarLabel">
-				{{ loginInfoStore.memberInfo }}
+				{{ loginInfoStore.memberInfo.username }} 님 환영합니다.
 			</h2>
 			<button
 				type="button"
@@ -44,7 +44,6 @@
 <script setup>
 import AppOffcanvas from '@/components/itemList/AppOffcanvas.vue';
 import { logout } from '@/axios/posts';
-import { ref } from 'vue';
 import { useLoginData } from '@/store';
 import { useRouter } from 'vue-router';
 
@@ -53,9 +52,12 @@ const router = useRouter();
 
 const logoutFunc = async () => {
 	try {
-		const result = await logout();
+		const result = await logout(
+			loginInfoStore.memberInfo.email,
+			localStorage.getItem('user'),
+		);
 		localStorage.removeItem('user');
-		router.push('/');
+		router.replace('/');
 	} catch (err) {
 		console.error(err);
 	}

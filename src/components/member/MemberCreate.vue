@@ -1,5 +1,6 @@
 <template>
-	<div class="container">
+	<MainHeader />
+	<div class="container py-4">
 		<div class="row g-3 mt-5">
 			<div class="col-3"></div>
 			<div class="card col-6">
@@ -51,6 +52,7 @@
 </template>
 
 <script setup>
+import MainHeader from '../MainHeader.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { memberCreate } from '@/axios/posts';

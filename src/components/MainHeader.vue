@@ -15,29 +15,29 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
-				<component
-					:is="tokenChecker ? curComp : (curComp.value = LoginOffCanvas)"
-				/>
+				<component :is="curComp" />
 			</div>
 		</nav>
 	</header>
 </template>
 
 <script setup>
-import MainOffcanvas from './MainOffcanvas.vue';
-import LoginOffCanvas from './login/offcanvas/LoginOffCanvas.vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { computed, ref, shallowRef } from 'vue';
+import LoginOffCanvas from './login/offcanvas/LoginOffCanvas.vue';
+import MainOffcanvas from './MainOffcanvas.vue';
 
-const itemCheckVar = ref(localStorage.getItem('user'));
-const curComp = shallowRef(MainOffcanvas);
+const tokenCheck = ref(localStorage.getItem('user'));
+const curComp = ref(MainOffcanvas);
 
-console.log(itemCheckVar);
+const changeComp = () => {
+	if (tokenCheck.value === null) curComp.value = MainOffcanvas;
+	else curComp.value = LoginOffCanvas;
+};
+
+changeComp();
+
 const router = useRouter();
-
-const tokenChecker = computed(() => {
-	return itemCheckVar.value === null ? true : false;
-});
 
 const goToHome = () => {
 	router.push('/');
