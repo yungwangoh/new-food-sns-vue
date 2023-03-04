@@ -14,9 +14,16 @@
 		<template #default>
 			<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="#" @click="logoutFunc"
-						>로그아웃</a
+					<RouterLink
+						class="nav-link"
+						aria-current="page"
+						to="/"
+						@click="logoutFunc"
+						>로그아웃</RouterLink
 					>
+					<!-- <a class="nav-link" aria-current="page" href="#" @click="logoutFunc"
+						>로그아웃</a
+					> -->
 				</li>
 				<li class="nav-item">
 					<a
@@ -57,7 +64,7 @@ const logoutFunc = async () => {
 			localStorage.getItem('user'),
 		);
 		localStorage.removeItem('user');
-		router.replace('/');
+		location.reload();
 	} catch (err) {
 		console.error(err);
 	}

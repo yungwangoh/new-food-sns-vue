@@ -22,13 +22,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, shallowRef } from 'vue';
 import { useRouter } from 'vue-router';
 import LoginOffCanvas from './login/offcanvas/LoginOffCanvas.vue';
 import MainOffcanvas from './MainOffcanvas.vue';
 
 const tokenCheck = ref(localStorage.getItem('user'));
-const curComp = ref(MainOffcanvas);
+const curComp = shallowRef(MainOffcanvas);
 
 const changeComp = () => {
 	if (tokenCheck.value === null) curComp.value = MainOffcanvas;
@@ -40,7 +40,7 @@ changeComp();
 const router = useRouter();
 
 const goToHome = () => {
-	router.push('/');
+	router.replace('/');
 };
 </script>
 

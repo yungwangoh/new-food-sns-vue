@@ -9,6 +9,7 @@
 
 <script setup>
 import MainHeader from './MainHeader.vue';
+import BoardCreate from './board/BoardCreate.vue';
 </script>
 
 <style></style>
